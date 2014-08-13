@@ -5,9 +5,10 @@ import usb.core
 
 class Printer(object):
     
-    def __init__(self, vendorId, productId):
+    def __init__(self, vendorId, productId, address=1):
         self.vendorId = vendorId
         self.productId = productId
+        self.address = address
         self.device = None
         self.endPoint = 0x01
         self.interface = 0
@@ -16,7 +17,8 @@ class Printer(object):
     def initializeDevice(self):
         self.device = usb.core.find(
             idVendor=self.vendorId,
-            idProduct=self.productId
+            idProduct=self.productId,
+            address=self.address
         )
         
         if self.device is None:

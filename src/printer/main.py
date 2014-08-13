@@ -17,5 +17,5 @@ for i in range(30):
 guiaDespacho.data = "$12.590.-"
 guiaDespacho.data = "$234.2342.-"
 
-epson = Printer(0x04B8, 0x0005)
+epson = Printer(0x04B8, 0x0005, 1)
 epson.printDocument(guiaDespacho)

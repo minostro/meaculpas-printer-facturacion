@@ -19,7 +19,6 @@ class DocumentoContable(Document):
         direccion = self.getDecodedString(direccion)
         giro = self.getDecodedString(giro)
         comuna = self.getDecodedString(comuna)
-        rut = self.getDecodedString(rut)
         
         nombre = "     %-55s" % nombre
         nombre = nombre[:55]
@@ -47,9 +46,9 @@ class DocumentoContable(Document):
         self.setData(codigo + descripcion + cantidad + precio_unitario + precio_total)
 
     def setCantidadPalabras(self, cantidadPalabras):
-        cantidadPalabras = self.getDecodedString(cantidadPalabras)
+        cantidadPalabras = self.getDecodedString(cantidadPalabras + " pesos.\n")
         self.setData("\n"* (22 - self.itemQuantity))
-        self.setData(cantidadPalabras.upper() + " pesos.\n")
+        self.setData(cantidadPalabras.upper())
         
     def setTotales(self, totalNeto, iva, ila13, ila15, ila27, total):
         leftMargin = " "*48
@@ -61,5 +60,5 @@ class DocumentoContable(Document):
         self.setData(leftMargin + " "*3 + "%25s" % total)
     
     def getDecodedString(self, text):
-        return text.encode('cp850') #'cp1252'
+        return text.encode('cp437')
 
